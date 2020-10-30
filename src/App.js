@@ -1,25 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import CharCon from './containers/CharCon'
+import TeamCon from './containers/TeamCon'
+import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  state={
+    team: []
+  }
+
+
+  clickHandler = (obj) => {
+    const newTeam = [obj, ...this.state.team]
+    this.setState( () => ({team: newTeam}))
+  }
+
+  render() {
+    console.log(this.state.team)
+    return (
+      <>
+        <h1>Anime Teams</h1>
+        <TeamCon team={this.state.team}/>
+        <CharCon clickHandler={this.clickHandler}/>
+      </>
+    )
+  }
 }
 
 export default App;
